@@ -6,7 +6,7 @@ module "cert" {
   source   = "./modules/certs"
   for_each = var.clusters
   ca       = module.cert_authority.ca
-  dns_name = "${var.cluster_name}-${each.key}.${var.dns_suffix}"
+  dns_suffix = "${var.dns_suffix}"
 }
 
 module "clusters" {

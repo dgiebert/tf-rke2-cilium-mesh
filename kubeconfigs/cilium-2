@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: "cilium-2"
+  cluster:
+    server: "https://rancher.giebert.eu/k8s/clusters/c-m-pgdj7cqb"
+
+users:
+- name: "cilium-2"
+  user:
+    token: "kubeconfig-user-f4td9rl68m:q59lpsb88rct5wbhr2nwkqbxtm96tmshfgghd6xl88nhpzsl7q9w9k"
+
+
+contexts:
+- name: "cilium-2"
+  context:
+    user: "cilium-2"
+    cluster: "cilium-2"
+
+current-context: "cilium-2"

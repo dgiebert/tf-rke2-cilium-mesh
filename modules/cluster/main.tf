@@ -111,6 +111,19 @@ rke2-cilium:
     id: ${var.id}
   operator:
     replicas: 1
+  hubble:
+    enabled: true
+    relay:
+      enabled: true
+    ui:
+      enabled: true
+    tls:
+      auto:
+        method: cronJob
+  tls:
+    ca:
+      cert: ${base64encode(var.ca.cert_pem)}
+      key: ${base64encode(var.ca.private_key_pem)}
   ipv4NativeRoutingCIDR: "10.0.0.0/9"
   clustermesh:
     useAPIServer: true

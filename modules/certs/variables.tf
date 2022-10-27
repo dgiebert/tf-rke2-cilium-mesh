@@ -1,4 +1,4 @@
 variable "ca" {  
 }
-variable "dns_name" {
+variable "dns_suffix" {
 }
