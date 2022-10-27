@@ -2,4 +2,5 @@ terraform.tfvars
 .auto.tfvars
 terraform.tfstate
 terraform.tfstate.backup
+.terraform.tfstate.lock.info
 .terraform
