@@ -1,8 +1,9 @@
 variable "clusters" {
-  default = {
-    "1" = { cluster_cidr = "10.42.0.0/16", service_cidr = "10.43.0.0/16", cluster_dns = "10.43.0.10" }
-    "2" = { cluster_cidr = "10.44.0.0/16", service_cidr = "10.45.0.0/16", cluster_dns = "10.45.0.10" }
-    "3" = { cluster_cidr = "10.46.0.0/16", service_cidr = "10.47.0.0/16", cluster_dns = "10.47.0.10" }
+  type = map(map(string))
+  default = {}
+  validation {
+    condition     = length(var.clusters) > 1
+    error_message = "Please check the terraform.tfvars.example"
   }
 }
 
@@ -29,8 +30,52 @@ variable "rancher2" {
 }
 
 variable "dns_suffix" {
-  default = "mesh.cilium.io"
+  description = "DNS Suffix used for communication between the components needed for the certs"
+  default = ""
+  validation {
+    condition     = length(var.dns_suffix) > 0
+    error_message = "Please provide a valid DNS suffix for the cluster (e.g mesh.cilium.io)"
+  }
 }
+
 variable "cluster_name" {
-  default = "cilium"
+  description = "Name of the cluster"
+  default = ""
+  validation {
+    condition     = length(var.cluster_name) > 0
+    error_message = "Please provide a name for the clusters (e.g. cilium)"
+  }
+}
+variable "pool_name" {
+  description = "Name of the pool"
+  default = ""
+  validation {
+    condition     = length(var.pool_name) > 0
+    error_message = "Please provide a name for the master pool (e.g. cplane)"
+  }
+}
+
+variable "network_name" {
+  description = "Network used for communication between the nodes"
+  default = ""
+  validation {
+    condition     = length(var.network_name) > 0
+    error_message = "Please provide the name of the network to use (e.g. harvester-public/vlan)"
+  }
+}
+variable "image_name" {
+  description = "Name of the image to boot the machine with"
+  default = ""
+  validation {
+    condition     = length(var.image_name) > 0
+    error_message = "Please provide the name of the image to use (e.g. harvester-public/opensuse-leap-15.4)"
+  }
+}
+
+variable "hetzner_token" {
+  default = ""
+}
+
+variable "registry_mirror" {
+  default = []
 }

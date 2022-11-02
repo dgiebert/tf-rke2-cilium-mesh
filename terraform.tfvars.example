@@ -1,5 +1,28 @@
 rancher2 = {
+  url        = ""
   access_key = ""
   secret_key = ""
-  url        = ""
+}
+
+dns_suffix = "mesh.cilium.io"
+
+hetzner_token = ""
+
+#registry_mirror = [{
+#  hostname  = "docker.io"
+#  endpoints = ["https://harbor.local"]
+#  rewrites = {
+#    "(.*)" : "docker-proxy/$1"
+# }
+#}]
+
+network_name = "harvester-public/vlan"
+image_name   = "harvester-public/opensuse-leap-15.4"
+cluster_name = "cilium"
+pool_name    = "pool1"
+
+clusters = {
+  "1" = { cluster_cidr = "10.42.0.0/16", service_cidr = "10.43.0.0/16", cluster_dns = "10.43.0.10", cpu = 2, memory = 4, disk_size = 40, ssh_user = "rancher" }
+  "2" = { cluster_cidr = "10.44.0.0/16", service_cidr = "10.45.0.0/16", cluster_dns = "10.45.0.10", cpu = 2, memory = 4, disk_size = 40, ssh_user = "rancher" }
+  "3" = { cluster_cidr = "10.46.0.0/16", service_cidr = "10.47.0.0/16", cluster_dns = "10.47.0.10", cpu = 2, memory = 4, disk_size = 40, ssh_user = "rancher" }
 }

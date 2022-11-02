@@ -11,7 +11,7 @@ resource "tls_cert_request" "cert" {
   subject {
     common_name = each.value
   }
-  dns_names = ["*.${var.dns_name}", "localhost"]
+  dns_names = ["*.${var.dns_suffix}", "*.mesh.cilium.io", "localhost"]
   ip_addresses = ["127.0.0.1"]
 }
 

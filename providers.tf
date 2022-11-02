@@ -8,6 +8,10 @@ terraform {
       source = "hashicorp/tls"
       version = "4.0.3"
     }
+    hetznerdns = {
+      source = "timohirt/hetznerdns"
+      version = "2.2.0"
+    }
   }
   required_version = "~> 1.3"
 }
@@ -16,4 +20,8 @@ provider "rancher2" {
   api_url    = var.rancher2.url
   access_key = var.rancher2.access_key
   secret_key = var.rancher2.secret_key
+}
+
+provider "hetznerdns" {
+  apitoken = var.hetzner_token
 }
