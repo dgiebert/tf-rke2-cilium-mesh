@@ -1,0 +1,40 @@
+# see: https://terraform-docs.io/user-guide/configuration/formatter
+formatter: markdown table
+
+content: |-
+  {{ .Header }}
+  # Terraform Module for RKE2 with Cilium Mesh
+
+  ## Terraform Details
+
+  {{ .Providers }}
+
+  {{ .Modules }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}  
+
+  ## Example
+
+  ```hcl
+  {{ include "terraform.tfvars.example" }}
+  ```
+
+# see: https://terraform-docs.io/user-guide/configuration/sort
+sort:
+  enabled: true
+  by: required
+
+# # https://terraform-docs.io/user-guide/configuration/output-values/
+# output-values:
+#   enabled: false
+#   from: ""
+
+# see: https://terraform-docs.io/user-guide/configuration/settings
+settings:
+  indent: 4
+  escape: false
+  default: false
+  required: false
+  type: true

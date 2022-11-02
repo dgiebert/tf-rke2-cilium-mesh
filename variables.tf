@@ -1,6 +1,7 @@
 variable "clusters" {
-  type    = map(map(string))
-  default = {}
+  description = "Cluster specification (check terraform.tfvars.example)"
+  type        = map(object({ cluster_cidr = string, service_cidr = string, cluster_dns = string, cpu = number, memory = number, disk_size = number, ssh_user = string }))
+  default     = {}
   validation {
     condition     = length(var.clusters) > 1
     error_message = "Please check the terraform.tfvars.example"
@@ -31,6 +32,7 @@ variable "rancher2" {
 
 variable "dns_suffix" {
   description = "DNS Suffix used for communication between the components needed for the certs"
+  type        = string
   default     = ""
   validation {
     condition     = length(var.dns_suffix) > 0
@@ -40,6 +42,7 @@ variable "dns_suffix" {
 
 variable "cluster_name" {
   description = "Name of the cluster"
+  type        = string
   default     = ""
   validation {
     condition     = length(var.cluster_name) > 0
@@ -49,6 +52,7 @@ variable "cluster_name" {
 
 variable "pool_name" {
   description = "Name of the pool"
+  type        = string
   default     = ""
   validation {
     condition     = length(var.pool_name) > 0
@@ -58,6 +62,7 @@ variable "pool_name" {
 
 variable "network_name" {
   description = "Network used for communication between the nodes"
+  type        = string
   default     = ""
   validation {
     condition     = length(var.network_name) > 0
@@ -67,6 +72,7 @@ variable "network_name" {
 
 variable "image_name" {
   description = "Name of the image to boot the machine with"
+  type        = string
   default     = ""
   validation {
     condition     = length(var.image_name) > 0
@@ -81,9 +87,13 @@ variable "ssh_keys" {
 }
 
 variable "hetzner_token" {
-  default = ""
+  description = "Token used to set DNS on Hetzner"
+  type        = string
+  default     = ""
 }
 
 variable "registry_mirror" {
-  default = []
+  description = "Docker proxy registry (check terraform.tfvars.example)"
+  type        = list(object({ hostname = string, endpoints = list(string), rewrites = map(string) }))
+  default     = []
 }
