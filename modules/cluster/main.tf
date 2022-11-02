@@ -16,7 +16,9 @@ resource "rancher2_machine_config_v2" "harvester" {
 #cloud-config
 user: rancher
 ssh_authorized_keys:
-  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJecgrKtXpkAtKmBaAGPDZ4optRnDfve87GDodFsXtDT dgiebert@dgnb
+%{for key in var.ssh_keys ~}
+  - ${key}
+%{endfor ~}
 package_update: true
 package_upgrade: true
 packages:
@@ -135,14 +137,14 @@ rke2-cilium:
     config:
       enabled: true
       clusters:
-      %{for key, client in { for k, v in var.certs : k => v if !(k == var.id) } }
+      %{for key, client in { for k, v in var.certs : k => v if !(k == var.id) } ~}
       - name: ${var.cluster_name}-${key}
         address: ${var.cluster_name}-${key}.${var.dns_suffix}
         port: 32379
         tls:
           cert: ${base64encode(client.certs["remote"].cert)}
           key: ${base64encode(client.certs["remote"].key)}
-      %{endfor}
+      %{endfor ~}
     apiserver:
       tls:
         auto:

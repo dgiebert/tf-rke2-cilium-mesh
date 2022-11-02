@@ -26,3 +26,7 @@ clusters = {
   "2" = { cluster_cidr = "10.44.0.0/16", service_cidr = "10.45.0.0/16", cluster_dns = "10.45.0.10", cpu = 2, memory = 4, disk_size = 40, ssh_user = "rancher" }
   "3" = { cluster_cidr = "10.46.0.0/16", service_cidr = "10.47.0.0/16", cluster_dns = "10.47.0.10", cpu = 2, memory = 4, disk_size = 40, ssh_user = "rancher" }
 }
+
+ssh_keys = [
+  "ssh-ed25519 AAAA...."
+]

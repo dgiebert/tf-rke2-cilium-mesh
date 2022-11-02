@@ -13,6 +13,7 @@ variable "cluster_name" {}
 variable "pool_name" {}
 variable "network_name" {}
 variable "image_name" {}
+variable "ssh_keys" {}
 variable "registry_mirror" {
   default = []
 }

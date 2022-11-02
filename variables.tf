@@ -1,5 +1,5 @@
 variable "clusters" {
-  type = map(map(string))
+  type    = map(map(string))
   default = {}
   validation {
     condition     = length(var.clusters) > 1
@@ -31,7 +31,7 @@ variable "rancher2" {
 
 variable "dns_suffix" {
   description = "DNS Suffix used for communication between the components needed for the certs"
-  default = ""
+  default     = ""
   validation {
     condition     = length(var.dns_suffix) > 0
     error_message = "Please provide a valid DNS suffix for the cluster (e.g mesh.cilium.io)"
@@ -40,15 +40,16 @@ variable "dns_suffix" {
 
 variable "cluster_name" {
   description = "Name of the cluster"
-  default = ""
+  default     = ""
   validation {
     condition     = length(var.cluster_name) > 0
     error_message = "Please provide a name for the clusters (e.g. cilium)"
   }
 }
+
 variable "pool_name" {
   description = "Name of the pool"
-  default = ""
+  default     = ""
   validation {
     condition     = length(var.pool_name) > 0
     error_message = "Please provide a name for the master pool (e.g. cplane)"
@@ -57,19 +58,26 @@ variable "pool_name" {
 
 variable "network_name" {
   description = "Network used for communication between the nodes"
-  default = ""
+  default     = ""
   validation {
     condition     = length(var.network_name) > 0
     error_message = "Please provide the name of the network to use (e.g. harvester-public/vlan)"
   }
 }
+
 variable "image_name" {
   description = "Name of the image to boot the machine with"
-  default = ""
+  default     = ""
   validation {
     condition     = length(var.image_name) > 0
     error_message = "Please provide the name of the image to use (e.g. harvester-public/opensuse-leap-15.4)"
   }
+}
+
+variable "ssh_keys" {
+  description = "SSH Keys used to connect remotely"
+  type        = list(string)
+  default     = []
 }
 
 variable "hetzner_token" {

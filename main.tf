@@ -19,6 +19,7 @@ module "clusters" {
   memory    = coalesce(each.value.memory, 4)           # Default: 4Gi RAM
   disk_size = coalesce(each.value.disk_size, 40)       # Default: 40Gi disk
   ssh_user  = coalesce(each.value.ssh_user, "rancher") # Default: rancher
+  ssh_keys  = var.ssh_keys
   # Individual Cluster Settings
   cluster_cidr = each.value.cluster_cidr
   service_cidr = each.value.service_cidr
